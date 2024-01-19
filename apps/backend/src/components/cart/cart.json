@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_cart_carts",
+  "info": {
+    "displayName": "Cart",
+    "icon": "chartBubble"
+  },
+  "options": {},
+  "attributes": {
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}

@@ -18,15 +18,19 @@
     "database:import": "./packages/dev-scripts/db-import.sh"
   },
   "devDependencies": {
+    "@strapi/eslint-config": "^0.2.0",
     "dotenv-cli": "7.3.0",
     "prettier": "^3.0.0",
-    "@strapi/eslint-config": "^0.2.0",
+    "react-error-overlay": "^6.0.9",
     "turbo": "1.10.4"
   },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "packageManager": "npm@18.16.0"
+  "packageManager": "npm@18.16.0",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "react-dotenv": "^0.1.3"
+  }
 }
-
