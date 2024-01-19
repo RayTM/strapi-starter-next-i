@@ -1,0 +1,32 @@
+{
+  "name": "cp-turborepo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "dotenv -- turbo run build",
+    "start": "dotenv -- turbo run start",
+    "dev": "dotenv -- turbo run dev",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "database": "docker compose up -d",
+    "database:export": "./packages/dev-scripts/db-export.sh",
+    "database:import": "./packages/dev-scripts/db-import.sh"
+  },
+  "devDependencies": {
+    "dotenv-cli": "7.3.0",
+    "prettier": "^3.0.0",
+    "@strapi/eslint-config": "^0.2.0",
+    "turbo": "1.10.4"
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
+  },
+  "packageManager": "npm@18.16.0"
+}
+
