@@ -18,10 +18,10 @@ function App() {
     const fetchProducts = async () => {
         try {
             const products: Products = await fetchData<Products>(
-                "http://127.0.0.1:1337/api/products?populate=*",
+                `${import.meta.env.VITE_APP_STRAPI_API_ENDPOINT}/api/products?populate=*`,
                 {
                     headers: {
-                        Authorization: `Bearer 22efe79c58227585db1056d4d622b76ee14db14a956e2693950f6b3894233c6a44695065f06c69beece2400d2208080adfba22844498c9676475d327c01c864135b5fa7e3702871759aae72ed5b1dd0716d3c1d91b959e28952a8d2f94c629572f1ef5aad5f98420073664415f441813dc7afed83dbc433094f058fd58fcf320`,
+                        Authorization: `Bearer ${import.meta.env.VITE_APP_STRAPI_API_PUBLIC_KEY}`,
                     },
                 }
             );
