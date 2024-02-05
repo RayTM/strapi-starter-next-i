@@ -25,7 +25,6 @@ function App() {
                     },
                 }
             );
-            console.log(products);
             setProducts(products);
         } catch (error) {
             setFetchError(true);

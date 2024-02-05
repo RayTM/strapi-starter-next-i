@@ -10,7 +10,8 @@ const Product = (product: Product) => {
         attributes;
 
     const imageUrl =
-        "http://127.0.0.1:1337" + productImage?.data.attributes?.url;
+        `${import.meta.env.VITE_APP_STRAPI_API_ENDPOINT}` +
+        productImage?.data.attributes?.url;
 
     const cartCookie =
         Cookie.get("cart") !== undefined ? Cookie.get("cart") : null;
@@ -38,7 +39,6 @@ const Product = (product: Product) => {
             ],
             total: cart.total + price,
         };
-        console.log(newCart);
         setCart(newCart);
     };
 
