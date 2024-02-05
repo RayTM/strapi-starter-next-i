@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { fetchData } from "./lib/fetch";
 import Product from "./components/Product";
 import "./App.css";
@@ -8,12 +8,6 @@ export const UserContext = createContext<User | null>(null);
 function App() {
     const [products, setProducts] = useState<Products>({ data: [] });
     const [fetchError, setFetchError] = useState<boolean>(false);
-
-    const myInputField = useRef<HTMLInputElement>(null);
-
-    const clickHandler = () => {
-        console.log(myInputField?.current?.value);
-    };
 
     const fetchProducts = async () => {
         try {
@@ -41,7 +35,7 @@ function App() {
 
     return (
         <UserContext.Provider value={{ id: 1, name: "Henri" }}>
-            <div className="container mx-auto">
+            <div className="container mx-auto pt-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10">
                     {products &&
                         products?.data?.map(
