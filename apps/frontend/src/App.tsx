@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { fetchData } from "./lib/fetch";
 import Product from "./components/Product";
 import "./App.css";
 
+export const UserContext = createContext<User | null>(null);
+
 function App() {
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<Products>({ data: [] });
     const [fetchError, setFetchError] = useState<boolean>(false);
 
     const myInputField = useRef<HTMLInputElement>(null);
@@ -15,7 +17,7 @@ function App() {
 
     const fetchProducts = async () => {
         try {
-            const products: Product[] = await fetchData<Product[]>(
+            const products: Products = await fetchData<Products>(
                 "http://127.0.0.1:1337/api/products?populate=*",
                 {
                     headers: {
@@ -23,12 +25,8 @@ function App() {
                     },
                 }
             );
+            console.log(products);
             setProducts(products);
-            {
-                products?.data?.map((product: Product, index: number) =>
-                    console.log(product)
-                );
-            }
         } catch (error) {
             setFetchError(true);
         }
@@ -43,27 +41,18 @@ function App() {
     }
 
     return (
-        <div className="container mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10">
-                {products &&
-                    products?.data?.map((product: Product, index: number) => (
-                        <Product {...product} key={index} />
-                    ))}
+        <UserContext.Provider value={{ id: 1, name: "Henri" }}>
+            <div className="container mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10">
+                    {products &&
+                        products?.data?.map(
+                            (product: Product, index: number) => (
+                                <Product {...product} key={index} />
+                            )
+                        )}
+                </div>
             </div>
-            <div className="flex gap-6">
-                <input
-                    ref={myInputField}
-                    className="px-6 py-4 rounded-md border border-slate-300"
-                    type="text"
-                />
-                <button
-                    onClick={clickHandler}
-                    className="px-6 py-4 rounded-md bg-indigo-800 text-white hover:bg-indigo-900"
-                >
-                    Send
-                </button>
-            </div>
-        </div>
+        </UserContext.Provider>
     );
 }
 
